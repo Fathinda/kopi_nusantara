@@ -1,4 +1,5 @@
-
+<div class="wrapnav">
+    
 <div class="info">
     <div class="container">
   <p>CoffeNusantara@gmail.com</p>
@@ -19,4 +20,5 @@
         <li><a href="{{route('home')}}">Product</a></li>
     </ul>
     </div>
+</div>
 </div>
