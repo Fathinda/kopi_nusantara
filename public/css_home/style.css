@@ -205,7 +205,17 @@ body {
     /* background-color: #CDB885; */
     /* height: 150dvh; */
     /* background-color: #6E5034; */
-    width: 110%;
+    width: 115%;
+}
+.logout {
+    padding: 10px 0;
+    background-color: red;
+    border-style: none;
+    
+}
+.mid {
+    text-align: center;
+    width: 500px;
 }
 .section8 {
     display: flex;

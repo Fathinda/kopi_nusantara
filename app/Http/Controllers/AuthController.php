@@ -21,10 +21,10 @@ class AuthController extends Controller
         if(!auth::attempt($req->only('email','password'))){
             return back()->with('error', 'email dan password salah');
         }
-        return redirect('/dashbord');
+        return redirect('/dashboard');
     }
     function logout(){
         Auth::logout();
-        return back()->with('gagal','Login gagal');
+        return redirect()->route('home')->with('gagal','Login gagal');
     }
 }

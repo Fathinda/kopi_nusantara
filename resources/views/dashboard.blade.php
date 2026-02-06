@@ -16,6 +16,10 @@
             <div class="admin-header">
                 <h1>Welcome to the Dashboard</h1>
                 <p>This is the main content area of the dashboard.</p>
+                <form action="{{route('logout')}}" method='post'>
+                    @csrf
+                    <button class='logout' type='submit'>Logout</button>
+                </form>
             </div>
 
             <div class="dashboard-card">

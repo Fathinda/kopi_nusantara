@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
+
 
 class MainController extends Controller
 {
@@ -12,8 +15,25 @@ class MainController extends Controller
         return view('main.home');
     }
 
+    public function cproduct($slug){
+      $cat = Category::where('name',$slug)->first();
+    //   dd($cat->id);
+            $product = Product::where('category_id',$cat->id)->get();
+         $category = Category::all();
+        return view('main.cproduct',compact('product','category'));
+
+    }
     public function product(){
-        return view('main.product');
+       
+            
+          
+
+       
+          $product = Product::all();
+         $category = Category::all();
+        
+      
+        return view('main.product',compact('product','category'));
     }
 
     public function news(){
