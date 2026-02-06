@@ -4,7 +4,7 @@
   <p>CoffeNusantara@gmail.com</p>
     <p>Tangerang, Banten</p>
     </div>
-  
+
 </div>
 
 <div class="navbar">
@@ -15,8 +15,9 @@
     </div>
     <ul>
         <li><a href="{{route('home')}}">home</a></li>
-        <li><a href="{{route('home')}}">About</a></li>
+        <li><a href="{{route('about')}}">About</a></li>
         <li><a href="{{route('home')}}">Product</a></li>
     </ul>
     </div>
+</div>
 </div>

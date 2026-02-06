@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    position: sticky;
+}
+.content{
+    background-color: #6e5034;
+    padding: 50px 80px;
+    color: #000;
+}
+.content h1{
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 40px;
+}
+.about_content {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+.about_text{
+    font-size: larger;
+    text-align: justify;
+    color: white;
+}
+.visi{
+    padding: 50px;
+}
+.visi h1{
+    cursor: pointer;
+}
+.visi p{
+    text-align: start;
+}
+.our_story{
+    padding: 50px;
+    cursor: pointer;
+}
+.our_story h1{
+    text-align: initial;
+}
+.stores{
+    padding: 50px;
+    cursor: pointer;
+    color: black;
+    background-color: #6e5034;
+    text-align: center;
+}
+.achievment{
+    padding: 50px;
+    background-color: #cdb885;
+    cursor: pointer;
+}
+.about_img{
+    width: 100%;
+    max-width: 420px;
+    border-radius: 16px;
+}
+@media (max-width:786px){
+    .about{
+        padding: 40px 6%;
+    }
+    .about_content{
+        flex-direction: column;
+        text-align: center;
+    }
+    .about_img{
+        max-width: 100%;
+    }
+    .about h1{
+        font-size: 30px;
+    }
+    .about p{
+        text-align: justify;
+    }
+}
