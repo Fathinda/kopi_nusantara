@@ -58,7 +58,7 @@ class TestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(test $test)
+    public function show(News $news)
     {
         //
     }
@@ -66,26 +66,44 @@ class TestController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(test $test)
+    public function edit(News $news)
     {
         //
-        $users
-        return view('admin.news.edit', compact('test'));
+        $users = User::all();
+        $categories = Category::all(); 
+        return view('admin.news.edit', compact('news', 'users', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, test $test)
+    public function update(Request $request, News $news)
     {
         //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'user_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $news->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => $request->user_id,
+            'category_id' => $request->category_id,
+        ]);
+
+        return redirect()->route('news.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(test $test)
+    public function destroy(News $news)
     {
         //
+        $news->delete();
+        return redirect()->route('news.index');
     }
 }
