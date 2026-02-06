@@ -10,7 +10,7 @@
                 <a href="{{route('slug',$categor->name)}}">{{$categor->name}}</a>
             </li>
             @empty
-            <p>Empty</p>
+
             @endforelse
         </ul>
     </div>
