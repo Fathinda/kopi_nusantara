@@ -7,7 +7,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProductController;
 // use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
->>>>>>> 1d01c7cbe1de0bf9d3a84149f439eed6c288ea4c
+
 
 /*
 |--------------------------------------------------------------------------
