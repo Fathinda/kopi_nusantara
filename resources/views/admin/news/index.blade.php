@@ -74,8 +74,8 @@
         @include('layoutsss.sidebar')
         <div class="admin-content">
             <div class="admin-header">
-                <h1>News Data 
-                    
+                <h1>News Data
+
                 </h1>
                 <a href="{{ route('news.create') }}"><i class="fa-solid fa-plus"></i></a>
             </div>
@@ -84,6 +84,7 @@
                 <thead>
                     <th>No</th>
                     <th>Title</th>
+                    <th>Image</th>
                     <th>Category</th>
                     <th>Author</th>
                     <th>Description</th>
@@ -95,6 +96,9 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $data->title}}</td>
+                        <td>
+                            <img src="{{ url('/uploaded/images/'.$data->images) }}" alt="News Image" width="100" height="100">
+                        </td>
                         <td>{{ $data->category->name }}</td>
                         <td>{{ $data->user->name }}</td>
                         <td>{{ $data->description }}</td>

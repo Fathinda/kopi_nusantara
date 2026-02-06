@@ -44,10 +44,13 @@ class ProductController extends Controller
             'description' => 'required|string',
         ]);
 
-        $image = $request->file('images');
-        $nama_file = "product_" . time() . "." . $image->getClientOriginalExtension();
-        $dir = 'uploaded/images';
-        $image->move($dir, $nama_file);
+        $nama_file = null;
+        if ($request->file('images')) {
+            $image = $request->file('images');
+            $nama_file = "product_" . time() . "." . $image->getClientOriginalExtension();
+            $dir = 'uploaded/images';
+            $image->move($dir, $nama_file);
+        }
 
         Product::create([
             'name' => $request->name,
@@ -92,23 +95,22 @@ class ProductController extends Controller
             'description' => 'required|string',
         ]);
 
+        $nama_file = $product->images;
+        $dir = 'uploaded/images';
         if ($request->file('images')) {
-        
+            // Delete old image if exists
+            if (File::exists($dir . '/' . $product->images)) {
+                File::delete($dir . '/' . $product->images);
+            }
+
             $image = $request->file('images');
             $nama_file = "product_" . time() . "." . $image->getClientOriginalExtension();
-            $dir = 'uploaded/images';
             $image->move($dir, $nama_file);
-
-            $product->images = $nama_file;
-        }
-
-        if (File::exists($dir . $product->images)) {
-            File::delete($dir . $product->images);
         }
 
         $product->update([
             'name' => $request->name,
-            'images' => $nama_file ?? $product->images,
+            'images' => $nama_file,
             'category_id' => $request->category_id,
             'user_id' => $request->user_id,
             'description' => $request->description,
@@ -123,6 +125,14 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+        // Delete the image file if it exists
+        if ($product->images) {
+            $dir = 'uploaded/images';
+            if (File::exists($dir . '/' . $product->images)) {
+                File::delete($dir . '/' . $product->images);
+            }
+        }
+
         $product->delete();
         return redirect()->route('products.index');
     }

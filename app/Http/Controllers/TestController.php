@@ -7,6 +7,7 @@ use App\Models\test;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class TestController extends Controller
 {
@@ -40,13 +41,21 @@ class TestController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
+            
             'description' => 'required|string',
             'user_id' => 'required|exists:users,id',
             'category_id' => 'required|exists:categories,id',
         ]);
 
+        $image = $request->file('images');
+        $nama_file = "news_" . uniqid() . "_" . $image->getClientOriginalExtension();
+        // dd($nama_file);
+        $dir = 'uploaded/images';
+        $image->move($dir, $nama_file);
+
         News::create([
             'title' => $request->title,
+            'images' => $nama_file,
             'description' => $request->description,
             'user_id' => $request->user_id,
             'category_id' => $request->category_id,
@@ -82,13 +91,29 @@ class TestController extends Controller
         //
         $request->validate([
             'title' => 'required|string|max:255',
+            
             'description' => 'required|string',
             'user_id' => 'required|exists:users,id',
             'category_id' => 'required|exists:categories,id',
         ]);
 
+        if ($request->file('images')) {
+        
+            $image = $request->file('images');
+            $nama_file = "news_" . uniqid() . "." . $image->getClientOriginalName();
+            $dir = 'uploaded/images';
+            $image->move($dir, $nama_file);
+
+            $news->images = $nama_file;
+        }
+
+        if (File::exists($dir . $news->images)) {
+            File::delete($dir . $news->images);
+        }
+
         $news->update([
             'title' => $request->title,
+            'images' => $nama_file ?? $news->images,
             'description' => $request->description,
             'user_id' => $request->user_id,
             'category_id' => $request->category_id,
