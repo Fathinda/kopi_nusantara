@@ -14,9 +14,9 @@
         <h1 class='nus'>Nusantara</h1>
     </div>
     <ul>
-        <li><a href="{{route('home')}}">home</a></li>
-        <li><a href="{{route('about')}}">About</a></li>
-        <li><a href="{{route('home')}}">Product</a></li>
+        <li class='{{Route::is("home") ? "active" : ""}}'><a href="{{route('home')}}">home</a></li>
+        <li class='{{Route::is("about") ? "active" : ""}}'><a href="{{route('about')}}">About</a></li>
+        <li class='{{Route::is("product") ? "active" : ""}}'><a href="{{route('product')}}">Product</a></li>
     </ul>
     </div>
 </div>

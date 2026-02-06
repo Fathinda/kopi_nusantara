@@ -4,10 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AboutController;
+<<<<<<< HEAD
+use App\Http\Controllers\AuthController;
+=======
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +35,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 
 Route::get('/home',[MainController::class,'home'])->name('home');
+Route::get('/product',[MainController::class,'product'])->name('product');
 Route::get('/About',[AboutController::class,'index'])->name('about');
 Route::get('/login',[AuthController::class,'index']);
 Route::post('/login', [AuthController::class,'loginproses'])->name('login');

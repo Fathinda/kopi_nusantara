@@ -10,7 +10,7 @@ use App\Models\User;
 class AuthController extends Controller
 {
     function index(){
-        return view('login.index');
+        return view('authen.index');
     }
 
     function loginProses(Request $req){
@@ -25,6 +25,6 @@ class AuthController extends Controller
     }
     function logout(){
         Auth::logout();
-        return redirect('/login');
+        return back()->with('gagal','Login gagal');
     }
 }
