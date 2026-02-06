@@ -8,10 +8,10 @@
             <div class="list1">
                 <h3>Menu</h3>
             <ul>
-                <li><a href="">home</a></li>
-                <li><a href="">About Us</a></li>
+                <li><a href="{{route('home')}}">home</a></li>
+                <li><a href="{{route('about')}}">About Us</a></li>
 
-                <li><a href="">Contact Us</a></li>
+                <li><a href="https://www.instagram.com/sannnsoo/">Contact Us</a></li>
 
             </ul>
             </div>
