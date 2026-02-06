@@ -42,17 +42,18 @@
                         </select>
                     </div>
 
+                    <!-- <div class="form-group-admin">
+                        <label for="user">User : </label>
+                        <input type="text" name="user_id" id="user_id">
+                    </div> -->
                     <div class="form-group-admin">
                         <label for="description">Description : </label>
                         <textarea name="description" id="description" rows="4"></textarea>
                     </div>
 
-                    
-                    <div class="button-group-admin">
-                        <button type="submit">Save</button>
-                        <a href="{{ route('products.index') }}">Cancel</a>
+                    <div class="form-group-admin">
+                        <button type="submit" class="btn-submit-admin">Create Product</button>
                     </div>
-
                 </form>
             </div>
         </div>

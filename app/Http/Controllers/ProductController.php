@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -26,7 +27,6 @@ class ProductController extends Controller
     {
         //
         $category = Category::all();
-
         return view('admin.product.create', compact('category'));
     }
 
@@ -36,20 +36,27 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-    $validate = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
-            'images' => 'nullable|image',
+            'images' => 'nullable|image|file',
             'category_id' => 'required|exists:categories,id',
-            'user_id' => 'required|exists:users,id',
+            // 'user_id' => 'required|exists:users,id',
             'description' => 'required|string',
         ]);
-        try { 
-    $path = $request->file('images')->store('public/images');
-        }
-  
-        Product::create($validate);
 
-        // dd($validate);
+        $image = $request->file('images');
+        $nama_file = "product_" . time() . "." . $image->getClientOriginalExtension();
+        $dir = 'uploaded/images';
+        $image->move($dir, $nama_file);
+
+        Product::create([
+            'name' => $request->name,
+            'images' => $nama_file,
+            'category_id' => $request->category_id,
+            'user_id' => '1',
+            'description' => $request->description,
+        ]);
+
         return redirect()->route('products.index');
     }
 
@@ -68,7 +75,7 @@ class ProductController extends Controller
     {
         //
         $category = Category::all();
-        return view('admin.product.edit', compact('product', 'category' ));
+        return view('admin.product.edit', compact('product', 'category'));
     }
 
     /**
@@ -77,26 +84,35 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
-        $validate = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
-            'images' => 'nullable|image|max:2048',
+            'images' => 'nullable|image|file',
             'category_id' => 'required|exists:categories,id',
             'user_id' => 'required|exists:users,id',
             'description' => 'required|string',
         ]);
 
-        if ($request->hasFile('images')) {
-           
-            if ($product->images) {
-                Storage::delete('public/images/' . $product->images);
-            }
-            $imagePath = $request->file('images')->store('public/images');
-            $validate['images'] = basename($imagePath);
+        if ($request->file('images')) {
+        
+            $image = $request->file('images');
+            $nama_file = "product_" . time() . "." . $image->getClientOriginalExtension();
+            $dir = 'uploaded/images';
+            $image->move($dir, $nama_file);
+
+            $product->images = $nama_file;
         }
 
-        
+        if (File::exists($dir . $product->images)) {
+            File::delete($dir . $product->images);
+        }
 
-        $product->update($validate);
+        $product->update([
+            'name' => $request->name,
+            'images' => $nama_file ?? $product->images,
+            'category_id' => $request->category_id,
+            'user_id' => $request->user_id,
+            'description' => $request->description,
+        ]);
 
         return redirect()->route('products.index');
     }

@@ -95,10 +95,11 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $data->name}}</td>
                         <td>
-                            <img src="{{ asset('storage/' . $data->images) }}" alt="Product Image" width="100" height="100" >
+                            <img src="{{ url('/uploaded/images/'.$data->images) }}" alt="Product Image" width="100" height="100" >
                         </td>
                         <td>{{ $data->category->name ?? '-' }}</td>
                         <td>{{ $data->user->name }}</td>
+                        <td>{{ $data->description }}</td>
                         
                         <td>
                             <form action="{{ route('products.destroy', $data->id) }}" method="post">

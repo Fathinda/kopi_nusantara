@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Models\test;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -13,6 +16,8 @@ class TestController extends Controller
     public function index()
     {
         //
+        $news = News::with(['category', 'user'])->get();
+        return view('admin.news.index', compact('news'));
     }
 
     /**
@@ -21,6 +26,9 @@ class TestController extends Controller
     public function create()
     {
         //
+        $users = User::all();
+        $categories = Category::all();
+        return view('admin.news.create', compact('users', 'categories'));
     }
 
     /**
@@ -29,6 +37,22 @@ class TestController extends Controller
     public function store(Request $request)
     {
         //
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'user_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        News::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => $request->user_id,
+            'category_id' => $request->category_id,
+        ]);
+
+        return redirect()->route('news.index');
     }
 
     /**
@@ -45,6 +69,8 @@ class TestController extends Controller
     public function edit(test $test)
     {
         //
+        $users
+        return view('admin.news.edit', compact('test'));
     }
 
     /**
