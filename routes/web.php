@@ -4,10 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\ProductController;
-// use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoriesController;
 
+use App\Http\Controllers\AuthController;
+=======
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategoriesController;
+>>>>>>> 1d01c7cbe1de0bf9d3a84149f439eed6c288ea4c
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +42,5 @@ Route::get('/About',[AboutController::class,'index'])->name('about');
 Route::get('/login',[AuthController::class,'index']);
 Route::post('/login', [AuthController::class,'loginproses'])->name('login');
 Route::get('/logout',[AuthController::class,'logout']);
+
+

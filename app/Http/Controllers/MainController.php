@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
@@ -34,4 +36,9 @@ class MainController extends Controller
         return view('main.product',compact('product','category'));
     }
 
+    public function news(){
+        $news = News::with(['category', 'user'])->get();
+        
+        return view('main.news', compact('news'));
+    }
 }
