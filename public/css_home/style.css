@@ -1,0 +1,78 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+       
+}
+
+
+/* 6E5034 */
+/* CDB885 */
+/* EFE1B5 */
+
+
+
+.navbar {
+        background-color:#6E5034 ;
+
+}
+.navbar .container {
+    color: white;
+        display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 15px;
+    /* padding: 10px 0; */
+}
+.nus{
+    color: #EFE1B5;
+}
+.navbar ul {
+    
+    display: flex;
+    list-style: none;
+    /* gap: ; */
+
+}
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+}
+.navbar ul li {
+    margin: 10px;
+
+    padding: 10px 15px;
+    transition: all .2s ease-in-out;
+}
+.navbar ul li:hover{ 
+    transition: all .2s ease-in-out;
+
+    background-color: #CDB885;
+    border-radius: 50px;
+}
+.info {
+         background-color:#CDB885 ;
+
+        
+}
+.info .container {
+    display: flex;
+        justify-content: space-between;
+        color: white;
+        padding: 5px;
+}
+.container {
+    width: 90%;
+    margin: auto;
+}
+.wrap1 {
+    
+}
