@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category | Index</title>
+    <title>Product | Index</title>
     <script src="https://kit.fontawesome.com/ad86009f10.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('../css_dashboard/style.css') }}">
     <style>
@@ -75,7 +75,7 @@
         <div class="admin-content">
             <div class="admin-header">
                 <h1>Product Data</h1>
-                <a href="{{ route('categories.create') }}"><i class="fa-solid fa-plus"></i></a>
+                <a href="{{ route('products.create') }}"><i class="fa-solid fa-plus"></i></a>
             </div>
 
             <table border="1">
@@ -95,7 +95,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $data->name}}</td>
                         <td>
-                            
+                            <img src="{{ asset('storage/' . $data->images) }}" alt="Product Image" width="100" height="100" >
                         </td>
                         <td>{{ $data->category->name ?? '-' }}</td>
                         <td>{{ $data->user->name }}</td>

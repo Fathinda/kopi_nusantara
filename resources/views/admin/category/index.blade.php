@@ -74,7 +74,10 @@
         @include('layoutsss.sidebar')
         <div class="admin-content">
             <div class="admin-header">
-                <h1>Category Data</h1>
+                <h1>Category Data 
+                    <br>
+                    <p>Dashboard / Category</p>
+                </h1>
                 <a href="{{ route('categories.create') }}"><i class="fa-solid fa-plus"></i></a>
             </div>
 

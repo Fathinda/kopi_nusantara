@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -23,7 +25,9 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view('admin.product.create');
+        $category = Category::all();
+
+        return view('admin.product.create', compact('category'));
     }
 
     /**
@@ -32,15 +36,20 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $validate = $request->validate([
+    $validate = $request->validate([
             'name' => 'required|string|max:255',
-            'images' => 'nullable|image|max:2048',
+            'images' => 'nullable|image',
             'category_id' => 'required|exists:categories,id',
             'user_id' => 'required|exists:users,id',
             'description' => 'required|string',
         ]);
-
+        try { 
+    $path = $request->file('images')->store('public/images');
+        }
+  
         Product::create($validate);
+
+        // dd($validate);
         return redirect()->route('products.index');
     }
 
@@ -58,7 +67,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
-        return view('admin.product.edit', compact('product'));
+        $category = Category::all();
+        return view('admin.product.edit', compact('product', 'category' ));
     }
 
     /**
@@ -74,7 +84,20 @@ class ProductController extends Controller
             'user_id' => 'required|exists:users,id',
             'description' => 'required|string',
         ]);
+
+        if ($request->hasFile('images')) {
+           
+            if ($product->images) {
+                Storage::delete('public/images/' . $product->images);
+            }
+            $imagePath = $request->file('images')->store('public/images');
+            $validate['images'] = basename($imagePath);
+        }
+
+        
+
         $product->update($validate);
+
         return redirect()->route('products.index');
     }
 

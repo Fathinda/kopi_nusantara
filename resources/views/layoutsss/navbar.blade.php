@@ -5,6 +5,6 @@
         </div>
 
         <div class="nav-right-admin">
-            <h2>BANG</h2>
-    </div>
+            
+        </div>
 </nav>
