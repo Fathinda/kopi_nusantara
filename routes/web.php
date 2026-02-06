@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +22,6 @@ Route::resource('categories', CategoriesController::class);
 Route::resource('products', ProductController::class);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+
+Route::get('/home',[MainController::class,'home'])->name('home');
